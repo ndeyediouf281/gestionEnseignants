@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  api_backend_commune:
+    container_name: api_backend_toure_mbonde
+    image: diambarsene/api-backend-toure-mbonde:v01
+    restart: always
+    ports:
+      - '8088:8088'
+    networks:
+      - toure_mbonde_network
+    volumes:
+      - toure_mbonde_uploads:/uploads
+    depends_on:
+      - db_api_backend_commune
+
+db_api_backend_commune:
+  container_name: db_api_backend_toure_mbonde
+  image: mysql:latest
+  environment:
+    MYSQL_ROOT_PASSWORD: sene
+    MYSQL_DATABASE: commune_toure_mbonde
+    MYSQL_USER: sene
+    MYSQL_PASSWORD: sene
+  healthcheck:
+    test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+    interval: 30s
+    timeout: 10s
+    retries: 5
+  ports:
+    - '3306:3306'
+  volumes:
+  - toure_mbonde_db_data:/var/lib/mysql
+  - toure_mbonde_db_data
+  networks:
+    toure_mbonde_network:
+      driver: bridge
+
+
+
+
+
+
