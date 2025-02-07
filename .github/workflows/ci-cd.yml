@@ -47,7 +47,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: diambarsene/gestion-enseignants:v01
+          tags: ndeyediouf281/gestion-enseignants:v01
 
   deploy:
     name: Déployer sur un VPS
@@ -80,7 +80,7 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: ${{ secrets.SSH_PORT }}
           script: |
-            docker pull diambarsene/gestion-enseignants:v01
+            docker pull ndeyediouf281/gestion-enseignants:v01
             cd /docker-file-l3l2i
             docker-compose down --remove-orphans
             docker system prune -af
